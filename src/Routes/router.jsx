@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main";
-import Home from '../pages/Home/Home/Home'
+// import Home from '../pages/Home/Home/Home';
 import Login from "../Pages/Shared/Login/Login";
 import Singup from "../Pages/Shared/Singup/Singup";
 import ErrorPage from "../Components/Error/ErrorPage";
@@ -23,6 +23,7 @@ import DashbordHome from "../Dashbord/DashbordHome/DashbordHome";
 import CouresDetails from "../Pages/couresDetails/CouresDetails";
 import CouresContent from "../Dashbord/coures-content/CouresContent";
 import LiveChat from "../Dashbord/live-chat/LiveChat";
+import Home from "../Pages/Home/Home/Home";
 
 export const router = createBrowserRouter([
     {

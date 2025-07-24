@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContex } from "../../Providers/AuthProvider";
 import CouresCart from "../../Components/CouresCart/CouresCart";
-import Item from "./item";
+import Item from "./Item";
 import { Helmet } from "react-helmet-async";
 
 const EnrolledClass = () => {
