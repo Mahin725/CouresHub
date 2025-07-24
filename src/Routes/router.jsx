@@ -24,6 +24,7 @@ import CouresDetails from "../Pages/couresDetails/CouresDetails";
 import CouresContent from "../Dashbord/coures-content/CouresContent";
 import LiveChat from "../Dashbord/live-chat/LiveChat";
 import Home from "../Pages/Home/Home/Home";
+import CouresPlayerLayout from "../Layouts/CouresPlayerLayout";
 
 export const router = createBrowserRouter([
     {
@@ -45,7 +46,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/courses/:id',
-                element: <CouresDetails/>
+                element: <CouresDetails />
             },
             {
                 path: '/comming-soon',
@@ -67,8 +68,8 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><Dashbord></Dashbord></PrivateRoute>,
         children: [
             {
-                path:'',
-                element: <DashbordHome/>
+                path: '',
+                element: <DashbordHome />
             },
             {
                 path: 'addnew',
@@ -100,7 +101,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'coures-content',
-                element: <CouresContent/>
+                element: <CouresContent />
             },
             {
                 path: 'payment-history',
@@ -115,9 +116,13 @@ export const router = createBrowserRouter([
                 element: <ManageClass></ManageClass>
             },
             {
-                path:'live-chat',
-                element: <LiveChat/>
+                path: 'live-chat',
+                element: <LiveChat />
             }
         ]
+    },
+    {
+        path: '/coures-content',
+        element: <PrivateRoute><CouresPlayerLayout /></PrivateRoute>
     }
 ])

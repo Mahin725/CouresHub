@@ -33,7 +33,7 @@ const Nabvar = () => {
         }
     </>
     return (
-        <div className="navbar bg-base-300 font-normal shadow-lg" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}>
+        <div className="navbar bg-base-300 font-normal shadow-lg " style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 ,}}>
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">

@@ -7,7 +7,8 @@ const Item = ({ item,index }) => {
             <th>{index+1}</th>
             <td>{item.name}</td>
             <td>{item.instructorName}</td>
-            <td className="btn btn-outline p-2"> Continue Class </td>
+            {/* <td className="btn btn-outline p-2" > Continue Class </td> */}
+            <Link to='/coures-content' state={item}>Countinue Class</Link>
         </tr>
     );
 
