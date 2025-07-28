@@ -14,7 +14,7 @@ const UseCart = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `https://speakup-ivory.vercel.app/carts?email=${user?.email}`
+          `http://localhost:5000/carts?email=${user?.email}`
         );
         if (!res.ok) {
           throw new Error("Failed to fetch cart data");

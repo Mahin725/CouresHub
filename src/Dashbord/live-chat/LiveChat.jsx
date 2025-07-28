@@ -11,7 +11,7 @@ const LiveChat = () => {
 
   const userQuery = () => {
     // i comment out Full Code For Key Issues
-    fetch("https://speakup-ivory.vercel.app/chat", {
+    fetch("http://localhost:5000/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -3,103 +3,82 @@ import { useEffect, useState } from "react";
 import Nabvar from "../Components/Nabvar/Nabvar";
 import CouresNotAccess from "../Components/Error/CouresNotAccess";
 
-// example backend dummy data
-const couresContent = {
-    courseId: "12345",
-    content: [
-        {
-            ID: "1",
-            title: "Introduction to the Course",
-            description: "An overview of what the course will cover.",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
-        },
-        {
-            ID: "2",
-            title: "Course Rules",
-            description: "Course rules and expectations.",
-            videoUrl: "https://www.youtube.com/embed/3GwjfUFyY6M"
-        },
-        {
-            ID: "3",
-            title: "Environment Setup",
-            description: "Setting up your development environment.",
-            videoUrl: "https://www.youtube.com/embed/kXYiU_JCYtU"
-        }
-    ]
-};
-
 const CouresPlayerLayout = () => {
-    const location = useLocation();
-    const couresInfo = location.state;
-    const [selectedVideo, setSelectedVideo] = useState(couresContent.content[0]);
+  const location = useLocation();
+  const couresInfo = location.state;
+  const [couresContent, setCouresContent] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
-    // Optional: Fetch from backend using couresInfo.courseId
-    useEffect(() => {
-        if (couresInfo?.courseId !== couresContent.courseId) {
-            // Ideally: fetch actual data here.
-            console.warn("Different courseId. Replace this with API call.");
+  useEffect(() => {
+    if (!couresInfo?._id) return;
+
+    fetch(`http://localhost:5000/content-collections/${couresInfo._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data?.content) && data.content.length > 0) {
+          const normalized = data.content.map((item, index) => ({
+            id: index.toString(),
+            title: item.moduleName || `Video ${index + 1}`,
+            description: "",
+            videoUrl: item.videoUrl,
+          }));
+          setCouresContent({ ...data, content: normalized });
+          setSelectedVideo(normalized[0]);
         }
-    }, [couresInfo]);
+      })
+      .catch((err) => {
+        console.error("Error fetching course content:", err);
+      });
+  }, [couresInfo]);
 
-    if (!couresInfo) {
-        return <CouresNotAccess />;
-    }
+  if (!couresInfo) return <CouresNotAccess />;
+  if (!couresContent || !selectedVideo) return <div className="text-center mt-20">Loading...</div>;
 
-    return (
-        <>
-            <Nabvar />
-            <div className="mt-20" style={{ display: "flex", height: "calc(100vh - 60px)" }}>
-                {/* Left: Video Player */}
-                <div style={{ flex: 2, padding: "24px", background: "#f9f9f9" }}>
-                    <h2>{selectedVideo.title}</h2>
-                    <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "8px" }}>
-                        <iframe
-                            src={selectedVideo.videoUrl}
-                            title={selectedVideo.title}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            style={{
-                                position: "absolute",
-                                top: 0,
-                                left: 0,
-                                width: "100%",
-                                height: "100%",
-                                borderRadius: "8px"
-                            }}
-                        ></iframe>
-                    </div>
-                    <p style={{ marginTop: "16px" }}>{selectedVideo.description}</p>
-                </div>
+  return (
+    <>
+      <Nabvar />
+      <div className="mt-20 flex flex-col md:flex-row h-[calc(100vh-60px)]">
+        {/* Left: Video Player */}
+        <div className="flex-1 p-4 bg-gray-100">
+          <h2 className="text-lg font-semibold mb-2">{selectedVideo.title}</h2>
+          <div className="aspect-video rounded overflow-hidden mb-4">
+            <iframe
+              src={selectedVideo.videoUrl}
+              title={selectedVideo.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
+          </div>
+          {selectedVideo.description && (
+            <p className="text-gray-700">{selectedVideo.description}</p>
+          )}
+        </div>
 
-                {/* Right: Video List */}
-                <div style={{ flex: 1, padding: "24px", borderLeft: "1px solid #eee", background: "#fff" }}>
-                    <h3>Course Videos</h3>
-                    <ul style={{ listStyle: "none", padding: 0 }}>
-                        {couresContent.content.map((video) => (
-                            <li key={video.ID} style={{ marginBottom: "12px" }}>
-                                <button
-                                    onClick={() => setSelectedVideo(video)}
-                                    style={{
-                                        width: "100%",
-                                        textAlign: "left",
-                                        padding: "12px",
-                                        border: "1px solid #ddd",
-                                        borderRadius: "6px",
-                                        background: selectedVideo.ID === video.ID ? "#e0e7ff" : "#f5f5f5",
-                                        cursor: "pointer",
-                                        fontWeight: "bold"
-                                    }}
-                                >
-                                    {video.title}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-        </>
-    );
+        {/* Right: Video List */}
+        <div className="w-full md:w-1/3 p-4 border-t md:border-t-0 md:border-l border-gray-200 bg-white">
+          <h3 className="text-lg font-bold mb-4">Course Videos</h3>
+          <ul className="space-y-3">
+            {couresContent.content.map((video) => (
+              <li key={video.id}>
+                <button
+                  onClick={() => setSelectedVideo(video)}
+                  className={`w-full text-left p-3 border rounded font-semibold transition ${
+                    selectedVideo.id === video.id
+                      ? "bg-indigo-100 border-indigo-300"
+                      : "bg-gray-100 hover:bg-gray-200"
+                  }`}
+                >
+                  {video.title}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default CouresPlayerLayout;

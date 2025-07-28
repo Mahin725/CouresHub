@@ -24,7 +24,7 @@ const Singup = () => {
         userProfileUpdate(data.name, data.photo).then(() => {
           const user = { name: data.name, email: data.email, role: "student" };
           console.log(user);
-          fetch("https://speakup-ivory.vercel.app/users", {
+          fetch("http://localhost:5000/users", {
             method: "post",
             headers: {
               "content-type": "application/json",

@@ -39,7 +39,7 @@ const CouresCart = ({ object }) => {
         price,
         email: user.email,
       };
-      fetch("https://speakup-ivory.vercel.app/carts", {
+      fetch("http://localhost:5000/carts", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -76,7 +76,7 @@ const CouresCart = ({ object }) => {
   };
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://speakup-ivory.vercel.app/user?email=${user.email}`)
+      fetch(`http://localhost:5000/user?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);

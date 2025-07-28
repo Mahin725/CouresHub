@@ -16,7 +16,7 @@ const ManageClassRow = ({ index, item }) => {
       preConfirm: (reason) => {
         if (reason) {
           const message = reason;
-          fetch(`https://speakup-ivory.vercel.app/feedback/${item._id}`, {
+          fetch(`http://localhost:5000/feedback/${item._id}`, {
             method: "PUT",
             headers: {
               "content-type": "application/json",
@@ -45,7 +45,7 @@ const ManageClassRow = ({ index, item }) => {
 
   const handleDeny = () => {
     const id = item._id;
-    fetch(`https://speakup-ivory.vercel.app/classDenied/${id}`, {
+    fetch(`http://localhost:5000/classDenied/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
@@ -66,7 +66,7 @@ const ManageClassRow = ({ index, item }) => {
 
   const handleApprove = () => {
     const id = item._id;
-    fetch(`https://speakup-ivory.vercel.app/classCollection/${id}`, {
+    fetch(`http://localhost:5000/classCollection/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())

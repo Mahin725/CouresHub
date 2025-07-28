@@ -25,6 +25,7 @@ import CouresContent from "../Dashbord/coures-content/CouresContent";
 import LiveChat from "../Dashbord/live-chat/LiveChat";
 import Home from "../Pages/Home/Home/Home";
 import CouresPlayerLayout from "../Layouts/CouresPlayerLayout";
+import AddModule from "../Dashbord/AddCouresModule";
 
 export const router = createBrowserRouter([
     {
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
             {
                 path: 'addnew',
                 element: <AddClass></AddClass>
+            },
+            {
+                path:'addnewmodule',
+                element: <AddModule />
             },
             {
                 path: 'myclasses',

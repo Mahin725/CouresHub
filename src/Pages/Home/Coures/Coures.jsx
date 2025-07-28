@@ -32,7 +32,7 @@ const Coures = () => {
   const [coures, setCoures] = useState([]);
 
   useEffect(() => {
-    fetch("https://speakup-ivory.vercel.app/coures")
+    fetch("http://localhost:5000/coures")
       .then((res) => res.json())
       .then((data) => setCoures(data));
   }, []);

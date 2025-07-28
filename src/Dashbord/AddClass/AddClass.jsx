@@ -32,7 +32,7 @@ const AddClass = () => {
       enrolled: parseInt(0),
     };
     console.log(item);
-    fetch("https://speakup-ivory.vercel.app/newclass", {
+    fetch("http://localhost:5000/newclass", {
       method: "POST",
       headers: {
         "content-type": "application/json",
