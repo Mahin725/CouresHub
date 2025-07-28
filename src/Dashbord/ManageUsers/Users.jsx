@@ -4,9 +4,11 @@ import Swal from "sweetalert2";
 
 const Users = ({ user, index }) => {
   const [users, refetch] = UseUsersMange();
+
+  // Make Admin
   const handleMakeAdmin = () => {
     const id = user._id;
-    fetch(`http://localhost:5000/${id}`, {
+    fetch(`http://localhost:5000/make-admin/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
@@ -16,31 +18,32 @@ const Users = ({ user, index }) => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Make Admin Successfully",
+            title: "Made Admin Successfully",
             showConfirmButton: false,
             timer: 1500,
           });
         }
       });
   };
-  // Make Instructor
-  const handleMakeInstructor = () => {
-    const id = user._id;
-    fetch(`http://localhost:5000/ctor/${id}`, {
-      method: "PUT",
+
+  // ✅ Make Club Member
+  const handleMakeClubMember = () => {
+    fetch("http://localhost:5000/add-club-member", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: user.email }),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.ok) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Make Instructor Successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: data.message || "Added to Club Members",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
   };
 
@@ -56,18 +59,15 @@ const Users = ({ user, index }) => {
           disabled={user.role === "admin"}
           className="btn btn-outline btn-sm"
         >
-          {" "}
-          <HiOutlineUser></HiOutlineUser>{" "}
+          <HiOutlineUser />
         </button>
       </td>
       <td>
         <button
-          onClick={handleMakeInstructor}
-          disabled={user.role === "instructor"}
+          onClick={handleMakeClubMember}
           className="btn btn-outline btn-sm"
         >
-          {" "}
-          <HiOutlineUserCircle></HiOutlineUserCircle>{" "}
+          <HiOutlineUserCircle />
         </button>
       </td>
     </tr>
