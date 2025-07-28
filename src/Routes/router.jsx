@@ -26,6 +26,7 @@ import LiveChat from "../Dashbord/live-chat/LiveChat";
 import Home from "../Pages/Home/Home/Home";
 import CouresPlayerLayout from "../Layouts/CouresPlayerLayout";
 import AddModule from "../Dashbord/AddCouresModule";
+import ClubMembers from "../Dashbord/ViewClubMembers";
 
 export const router = createBrowserRouter([
     {
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
             {
                 path:'addnewmodule',
                 element: <AddModule />
+            },
+            {
+                path:'club-members',
+                element: <PrivateRoute><ClubMembers /></PrivateRoute>
             },
             {
                 path: 'myclasses',

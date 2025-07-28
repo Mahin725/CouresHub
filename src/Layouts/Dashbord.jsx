@@ -67,6 +67,7 @@ const Dashbord = () => {
                         IsAdmin && <>
                             <li><Link to='/dashbord/manage-classes' className="text-2xl mt-2"> <HiOutlineCollection></HiOutlineCollection> Manage Classes</Link> </li>
                             <li><Link to='/dashbord/manage-users' className="text-2xl mt-2"> <HiUserGroup></HiUserGroup> Manage Users</Link> </li>
+                            <li><Link to='/dashbord/club-members' className="text-2xl mt-2"> <HiUserGroup></HiUserGroup> Club Members</Link> </li>
                         </>
                     }
                     <div className="divider"></div>
