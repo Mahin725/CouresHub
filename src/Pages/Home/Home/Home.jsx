@@ -13,7 +13,7 @@ const Home = () => {
     <div>
       <div>
         <Helmet>
-          <title>Home || SpeakUp</title>
+          <title>Home || BSPI-PC</title>
         </Helmet>
       </div>
       <Hero />

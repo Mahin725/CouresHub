@@ -43,7 +43,7 @@ const Nabvar = () => {
                         {items}
                     </ul>
                 </div>
-                <a className=" normal-case text-2xl font-semibold">SpeakUp <span className='text-yellow-400'>School</span> </a>
+                <a className=" normal-case text-2xl font-semibold">BSPI <span className='text-yellow-400'>Programming Club</span> </a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal text-xl px-1">
