@@ -2,16 +2,32 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Nabvar from "../Components/Nabvar/Nabvar";
 import CouresNotAccess from "../Components/Error/CouresNotAccess";
+import { AuthContex } from "../Providers/AuthProvider";
+import { useContext } from "react";
 
 const CouresPlayerLayout = () => {
+  const { user } = useContext(AuthContex);
   const location = useLocation();
   const couresInfo = location.state;
-  // console.log("Coures Info:", couresInfo);
   const [couresContent, setCouresContent] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
+  // ———— Security check state ————
+  const [isClubMember, setIsClubMember] = useState(null);
+  const userEmail = user?.email;
+
+  useEffect(() => {
+    if (!userEmail) return;
+
+    fetch(`http://localhost:5000/is-club-member?email=${encodeURIComponent(userEmail)}`)
+      .then((res) => res.json())
+      .then((data) => setIsClubMember(data.isMember))
+      .catch(() => setIsClubMember(false));
+  }, [userEmail]);
+
   useEffect(() => {
     if (!couresInfo?._id) return;
+    if (isClubMember === false) return; // Access denied, skip fetching content
 
     fetch(`http://localhost:5000/content-collections/${couresInfo._id}`)
       .then((res) => res.json())
@@ -30,9 +46,12 @@ const CouresPlayerLayout = () => {
       .catch((err) => {
         console.error("Error fetching course content:", err);
       });
-  }, [couresInfo]);
+  }, [couresInfo, isClubMember]);
 
   if (!couresInfo) return <CouresNotAccess />;
+  if (isClubMember === null) return <div className="text-center mt-20">Checking Access...</div>;
+  if (isClubMember === false) return <CouresNotAccess />;
+
   if (!couresContent || !selectedVideo) return <div className="text-center mt-20">Loading...</div>;
 
   return (

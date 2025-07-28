@@ -89,6 +89,11 @@ export const router = createBrowserRouter([
                 path: 'myclasses',
                 element: <MyClasses></MyClasses>
             },
+
+            {
+                path: 'enrolled-class',
+                element: <EnrolledClass></EnrolledClass>
+            },
             {
                 path: 'mycart',
                 element: <MySelectedClass></MySelectedClass>
@@ -104,10 +109,6 @@ export const router = createBrowserRouter([
             {
                 path: 'stripe-pay',
                 element: <Payment />
-            },
-            {
-                path: 'enrolled-class',
-                element: <EnrolledClass></EnrolledClass>
             },
             {
                 path: 'coures-content',
