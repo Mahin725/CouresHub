@@ -16,7 +16,7 @@ const Checkout = ({ price, cartId }) => {
 
   useEffect(() => {
     if (price) {
-      fetch("http://localhost:5000/create-payment-intent", {
+      fetch("https://speakup-ivory.vercel.app/create-payment-intent", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -76,7 +76,7 @@ const Checkout = ({ price, cartId }) => {
         date: new Date().toISOString(),
       };
       console.log(payment);
-      fetch("http://localhost:5000/payments", {
+      fetch("https://speakup-ivory.vercel.app/payments", {
         method: "POST",
         headers: {
           "content-type": "application/json",

@@ -8,7 +8,7 @@ const UserRole = () => {
     queryKey: ["user", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/user?email=${user?.email}`
+        `https://speakup-ivory.vercel.app/user?email=${user?.email}`
       );
       return res.json();
     },

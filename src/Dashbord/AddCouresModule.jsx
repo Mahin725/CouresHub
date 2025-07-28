@@ -7,7 +7,7 @@ const AddModule = () => {
     const [courses, setCourses] = useState([]);
     console.log(courses);
     useEffect(() => {
-        fetch("http://localhost:5000/allclasses")
+        fetch("https://speakup-ivory.vercel.app/allclasses")
             .then((res) => res.json())
             .then((data) => setCourses(data));
     }, []);
@@ -19,7 +19,7 @@ const AddModule = () => {
             videoUrl: data.videoUrl,
         };
 
-        const response = await fetch(`http://localhost:5000/content-collections/${data.courseId}`, {
+        const response = await fetch(`https://speakup-ivory.vercel.app/content-collections/${data.courseId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

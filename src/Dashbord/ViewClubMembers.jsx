@@ -5,7 +5,7 @@ const ClubMembers = () => {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:5000/club-members')
+    fetch('https://speakup-ivory.vercel.app/club-members')
       .then(res => res.json())
       .then(data => setMembers(data))
       .catch(error => console.error("Error fetching members:", error));

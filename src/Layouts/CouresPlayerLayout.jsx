@@ -19,7 +19,7 @@ const CouresPlayerLayout = () => {
   useEffect(() => {
     if (!userEmail) return;
 
-    fetch(`http://localhost:5000/is-club-member?email=${encodeURIComponent(userEmail)}`)
+    fetch(`https://speakup-ivory.vercel.app/is-club-member?email=${encodeURIComponent(userEmail)}`)
       .then((res) => res.json())
       .then((data) => setIsClubMember(data.isMember))
       .catch(() => setIsClubMember(false));
@@ -29,7 +29,7 @@ const CouresPlayerLayout = () => {
     if (!couresInfo?._id) return;
     if (isClubMember === false) return; // Access denied, skip fetching content
 
-    fetch(`http://localhost:5000/content-collections/${couresInfo._id}`)
+    fetch(`https://speakup-ivory.vercel.app/content-collections/${couresInfo._id}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data?.content) && data.content.length > 0) {

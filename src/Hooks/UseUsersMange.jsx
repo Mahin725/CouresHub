@@ -9,7 +9,7 @@ const UseUsersMange = () => {
     queryKey: ["users"],
     queryFn: async () => {
       try {
-        const res = await fetch("http://localhost:5000/all-users");
+        const res = await fetch("https://speakup-ivory.vercel.app/all-users");
         if (!res.ok) {
           throw new Error("Failed to fetch cart data");
         }

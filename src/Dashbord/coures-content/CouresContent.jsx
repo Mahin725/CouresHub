@@ -12,7 +12,7 @@ const CouresContent = () => {
   useEffect(() => {
     if (!couresInfo?._id) return;
 
-    fetch(`http://localhost:5000/content-collections/${couresInfo._id}`)
+    fetch(`https://speakup-ivory.vercel.app/content-collections/${couresInfo._id}`)
       .then((res) => res.json())
       .then((result) => {
         setData(result.content || []);

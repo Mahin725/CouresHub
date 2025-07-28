@@ -8,7 +8,7 @@ const Users = ({ user, index }) => {
   // Make Admin
   const handleMakeAdmin = () => {
     const id = user._id;
-    fetch(`http://localhost:5000/make-admin/${id}`, {
+    fetch(`https://speakup-ivory.vercel.app/make-admin/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
@@ -28,7 +28,7 @@ const Users = ({ user, index }) => {
 
   // ✅ Make Club Member
   const handleMakeClubMember = () => {
-    fetch("http://localhost:5000/add-club-member", {
+    fetch("https://speakup-ivory.vercel.app/add-club-member", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

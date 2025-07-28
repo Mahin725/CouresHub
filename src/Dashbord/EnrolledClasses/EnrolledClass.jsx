@@ -11,7 +11,7 @@ const EnrolledClass = () => {
   useEffect(() => {
     if (user?.email) {
       fetch(
-        `http://localhost:5000/enrolled-classes?email=${user.email}`
+        `https://speakup-ivory.vercel.app/enrolled-classes?email=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {

@@ -8,7 +8,7 @@ const ManageClassRow = ({ index, item }) => {
 
   const handleApprove = () => {
     const id = item._id;
-    fetch(`http://localhost:5000/classCollection/${id}`, {
+    fetch(`https://speakup-ivory.vercel.app/classCollection/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())

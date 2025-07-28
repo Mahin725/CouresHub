@@ -10,7 +10,7 @@ const UseManageClass = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/classCollection"
+          "https://speakup-ivory.vercel.app/classCollection"
         );
         if (!res.ok) {
           throw new Error("Failed to fetch cart data");

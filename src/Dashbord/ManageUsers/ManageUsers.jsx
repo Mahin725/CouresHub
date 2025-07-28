@@ -9,7 +9,7 @@ const ManageUsers = () => {
 
   const [users] = UseUsersMange();
   // useEffect(() => {
-  //     fetch('http://localhost:5000/
+  //     fetch('https://speakup-ivory.vercel.app/
   //         .then(res => res.json())
   //         .then(data => {
   //             console.log(data);

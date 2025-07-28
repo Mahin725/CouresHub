@@ -15,7 +15,7 @@ const Row = ({ row, index }) => {
   const handleRemove = () => {
     const couresId = { cartId: row.cartId };
     console.log(couresId);
-    fetch("http://localhost:5000/carts", {
+    fetch("https://speakup-ivory.vercel.app/carts", {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

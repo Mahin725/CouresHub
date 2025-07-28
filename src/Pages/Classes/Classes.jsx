@@ -35,7 +35,7 @@ const Classes = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/allclasses")
+    fetch("https://speakup-ivory.vercel.app/allclasses")
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
