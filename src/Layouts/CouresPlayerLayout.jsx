@@ -6,6 +6,7 @@ import CouresNotAccess from "../Components/Error/CouresNotAccess";
 const CouresPlayerLayout = () => {
   const location = useLocation();
   const couresInfo = location.state;
+  // console.log("Coures Info:", couresInfo);
   const [couresContent, setCouresContent] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
 

@@ -31,8 +31,7 @@ const ManageClass = () => {
                             <th>About Instructor</th>
                             <th>Current Status</th>
                             <th>Approved</th>
-                            <th>Deny</th>
-                            <th>Send FeedBack</th>
+                            <th>View Content</th>
                         </tr>
                     </thead>
                     <tbody>

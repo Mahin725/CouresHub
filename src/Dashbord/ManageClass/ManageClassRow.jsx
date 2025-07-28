@@ -1,68 +1,10 @@
 import Swal from "sweetalert2";
 import UseManageClass from "../../Hooks/UseManageClass";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ManageClassRow = ({ index, item }) => {
   const [classes, refetch] = UseManageClass();
-
-  const handleFeedback = () => {
-    Swal.fire({
-      title: "Send Feedback",
-      input: "textarea",
-      inputPlaceholder: "Enter feedback reason...",
-      showCancelButton: true,
-      confirmButtonText: "Send",
-      cancelButtonText: "Cancel",
-      preConfirm: (reason) => {
-        if (reason) {
-          const message = reason;
-          fetch(`http://localhost:5000/feedback/${item._id}`, {
-            method: "PUT",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify({ message }),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-            });
-        }
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Feedback sent successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
-  };
-
-  const handleDeny = () => {
-    const id = item._id;
-    fetch(`http://localhost:5000/classDenied/${id}`, {
-      method: "PUT",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.ok) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Class Denied Successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
-  };
 
   const handleApprove = () => {
     const id = item._id;
@@ -123,19 +65,15 @@ const ManageClassRow = ({ index, item }) => {
         </button>
       </td>
       <td>
-        <button
-          onClick={handleDeny}
-          disabled={item.status === "approved" || item.status === "denied"}
+        <Link
+          to={`/coures-content`}
+          state={item}
           className="btn btn-outline btn-sm"
         >
-          Deny
-        </button>
+          View
+        </Link>
       </td>
-      <td>
-        <button onClick={handleFeedback} className="btn btn-outline btn-sm">
-          Feedback
-        </button>
-      </td>
+      
     </tr>
   );
 };
