@@ -1,23 +1,59 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Hero = () => {
-    return (
-        <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://nutritionguide.pcrm.org/nutritionguide/repview?type=598-829&name=23_1238024_Standard)' }}>
-            <div className="hero-overlay bg-opacity-60"></div>
-            <div className="hero-content text-center text-neutral-content">
-                <div className="max-w-md">
-                    <h1 className="mb-5 text-2xl font-bold text-white">We help you learn what you love</h1>
-                    <p className="mb-5">It’s the last day to save Expand your horizons with learning that’s worldwide. Log in now to shop the sale. A broad selection of courses Choose from 204,000 online video courses with new additions published every month
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-base-100 to-secondary/10 py-20">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-                    </p>
-                    <div className=' space-x-3 center'>
-                        <Link to='/login'><button className="btn btn-outline btn-error">Join With Us</button></Link>
-                        <Link to='/classes'><button className="btn btn-outline btn-error">Browse Courses</button></Link>
-                    </div>
-                </div>
+          {/* Left side content */}
+          <div data-aos="fade-right">
+            <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight">
+              Build Your Skills.<br />
+              <span className="text-primary">Master Technology Courses</span> at Your Pace
+            </h1>
+
+            <p className="text-xl text-base-content/70 mt-6">
+              Explore structured courses in Web Development, Data Science, AI, Cloud, DevOps, and more.
+              Learn from expert instructors, track your progress, and manage your learning hub in one place.
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link to="/courses" className="btn btn-primary btn-md shadow-lg">
+                Explore Courses Hub
+              </Link>
+              <Link to="/dashboard" className="btn btn-outline btn-secondary btn-md">
+                Go to My Learning Dashboard
+              </Link>
             </div>
+          </div>
+
+          <div data-aos="fade-left" className="flex justify-center">
+            {/* Option 1: Image */}
+            {/* <img
+              src="https://images.unsplash.com/photo-1581092333840-2a0c4d4b2b2d?auto=format&fit=crop&w=800&q=80"
+              alt="Courses Hub"
+              className="rounded-xl shadow-xl w-full max-w-lg"
+            /> */}
+
+            {/* Option 2: YouTube Video */}
+
+            <div className="w-full max-w-lg aspect-video rounded-xl overflow-hidden shadow-xl">
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/2SXCR-43RjM?si=sIaIcQ5wnzhaCsAK"
+                title="Courses Hub Overview"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+
+          </div>
+
         </div>
-    );
+      </div>
+    </section>
+  );
 };
 
 export default Hero;

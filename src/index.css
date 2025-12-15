@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-li:hover{
-    color: yellow;
+/* Smooth scroll and better list hover */
+html body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+li:hover {
+    color: #FFC107;
+    transition: color 0.3s ease;
+}
+
+/* Optional: Custom card hover lift */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s ease;
 }

@@ -1,69 +1,62 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
-import SwiperCore from "swiper";
+
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/navigation";
-import { Autoplay, Navigation, Pagination } from "swiper/core";
+import "swiper/css/pagination";
+
 import CourseCard from "../../../Components/UpdatedCouresCart/UpdatedCouresCart";
+import api from "../../../api/axios";
 
-SwiperCore.use([Navigation, Pagination]);
-
-const breakpoints = {
-  320: {
-    slidesPerView: 1,
-    spaceBetween: 10,
-  },
-  640: {
-    slidesPerView: 2,
-    spaceBetween: 20,
-  },
-  768: {
-    slidesPerView: 3,
-    spaceBetween: 30,
-  },
-  1024: {
-    slidesPerView: 4,
-    spaceBetween: 40,
-  },
-};
 
 const Coures = () => {
   const [coures, setCoures] = useState([]);
-
+  console.log("Coures", coures);
   useEffect(() => {
-    fetch("https://speakup-ivory.vercel.app/coures")
-      .then((res) => res.json())
-      .then((data) => setCoures(data));
+    api.get("/coures/allCoures")
+      .then(res => setCoures(res.data.data));
   }, []);
-  return (
-    <div>
-      <h2 className="text-center text-3xl font-bold my-3">Coures_</h2>
 
-      {/* COURSES SECTION */}
-      <div className="">
+  return (
+    <section className="py-20 bg-base-100">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-14" data-aos="fade-up">
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+            Industry-Focused Tech Courses
+          </h2>
+          <p className="text-base-content/70 max-w-2xl mx-auto">
+            Learn practical skills in frontend, backend, databases, and system design
+            through real projects and production-ready workflows.
+          </p>
+        </div>
+
+
         <Swiper
-          loop={true}
-          slidesPerView={3}
-          autoplay={true}
-          modules={[Pagination, Autoplay]}
-          breakpoints={breakpoints}
-          className="flex flex-row mt-10 md:pt-5"
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={30}
+          slidesPerView={1}
+          breakpoints={{
+            640: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+          }}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000 }}
+          loop
         >
-          {coures?.map((course, index) => (
-            <SwiperSlide key={index} className="md:p-5">
-              <CourseCard course={course} />
+          {coures.map((c, i) => (
+            <SwiperSlide key={c._id}>
+              <div data-aos="flip-left" data-aos-delay={i * 100}>
+                <CourseCard course={c} />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
-
-      {/* <div className="grid md:grid-cols-3 space-y-7">
-        {coures.map((object) => (
-          <CouresCart object={object} key={object._id}></CouresCart>
-        ))}
-      </div> */}
-    </div>
+    </section>
   );
 };
 

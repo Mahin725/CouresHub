@@ -1,31 +1,31 @@
 import { Helmet } from "react-helmet-async";
-// import Banner from "../Banner/Banner";
+import Hero from "../Hero/Hero";
 import Coures from "../Coures/Coures";
 import Instructors from "../Instructors/Instructors";
-import Testimonial from "../Testimonial/Testimonial.jsx";
-import Hero from "../Hero/Hero";
-import Mission from "../Mission/Mission.jsx";
-import Footer from "../../../Components/Footer/Footer.jsx";
-import Info from "../info/Info.jsx";
+import Info from "../info/Info";
+import Testimonial from "../Testimonial/Testimonial";
+import Mission from "../Mission/Mission";
+import Footer from "../../../Components/Footer/Footer";
 
 const Home = () => {
   return (
-    <div>
-      <div>
-        <Helmet>
-          <title>Home || SpeakUp</title>
-        </Helmet>
-      </div>
+    <div className="pt-20 bg-base-100 min-h-screen"> {/* Offset for fixed navbar */}
+      <Helmet>
+        <title>Home | Coures Hub</title>
+      </Helmet>
+
       <Hero />
-      {/* <Banner></Banner> */}
-      <div className="mx-20">
-        <Coures />
-        <Instructors />
-        <Info/>
-        <Testimonial />
-        <Mission />
-      </div>
-      {/* <Footer/> */}
+
+      <Info />
+
+      <Coures />
+
+      <Instructors />
+
+      <Testimonial />
+
+      <Mission />
+      <Footer />
     </div>
   );
 };

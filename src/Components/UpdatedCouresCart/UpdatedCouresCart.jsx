@@ -5,7 +5,7 @@ import UseCart from "../../Hooks/UseCart";
 import { AuthContex } from "../../Providers/AuthProvider";
 
 const CourseCard = ({ course }) => {
-  console.log(course);
+  // console.log(course);
   const {
     _id,
     name,
@@ -124,7 +124,7 @@ const CourseCard = ({ course }) => {
             >
               {btnDisable ? "Added" : "Add to cart"}
             </button>
-            <button className="w-full bg-gray-800 text-white font-semibold py-1 md:py2 px-4 rounded-sm duration-300">
+            <button className="btn btn-primary w-full text-white font-semibold py-1 md:py2 px-4 rounded-sm duration-300">
               <Link
                 to={`/courses/${_id}`}
                 state={course}
