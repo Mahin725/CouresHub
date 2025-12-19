@@ -50,7 +50,6 @@ const Social = () => {
   };
   return (
     <div>
-      <div className="divider mt-0"></div>
       <div className="text-center my-2">
         <button
           onClick={handleGoogle}
