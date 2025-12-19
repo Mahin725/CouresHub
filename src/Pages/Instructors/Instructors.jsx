@@ -7,7 +7,7 @@ const Instructors = () => {
   const { data: instructor = mentors } = useQuery({
     queryKey: ["instructor"],
     queryFn: async () => {
-      const res = await fetch("https://speakup-ivory.vercel.app/instructors");
+      const res = await fetch("/instructor/instructors");
       return res.json();
     },
   });
