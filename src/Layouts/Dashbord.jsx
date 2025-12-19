@@ -14,7 +14,7 @@ const Dashbord = () => {
     const [IsStudent, setStudent] = useState(false)
 
     const [dataUser, isLoading] = UserRole();
-
+    console.log("dataUSer",dataUser);
     useEffect(() => {
 
         if (dataUser?.role === 'student') {

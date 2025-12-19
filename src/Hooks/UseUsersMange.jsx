@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import instance from "../api/axios";
 
 const UseUsersMange = () => {
   const {
@@ -9,12 +10,9 @@ const UseUsersMange = () => {
     queryKey: ["users"],
     queryFn: async () => {
       try {
-        const res = await fetch("https://speakup-ivory.vercel.app/all-users");
-        if (!res.ok) {
-          throw new Error("Failed to fetch cart data");
-        }
-        const data = await res.json();
-        return data;
+        const res = await instance.get("/user/getAllUsers?page=1")
+        
+        return res.data.data;
       } catch (error) {
         console.error(error);
         throw error; // Rethrow the error to let react-query handle it
