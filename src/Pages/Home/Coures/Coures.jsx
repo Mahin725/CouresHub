@@ -15,7 +15,7 @@ const Coures = () => {
   const [coures, setCoures] = useState([]);
   console.log("Coures", coures);
   useEffect(() => {
-    api.get("/coures/allCoures")
+    api.get("/coures/all-approved-coures")
       .then(res => setCoures(res.data.data));
   }, []);
 

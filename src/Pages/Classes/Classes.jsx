@@ -36,7 +36,7 @@ const Classes = () => {
   };
 
   useEffect(() => {
-    instance.get("/coures/allCoures")
+    instance.get("/coures/all-approved-coures")
       .then(res => setClasses(res.data.data));
   }, []);
 
