@@ -1,9 +1,10 @@
 import { Link, Outlet } from "react-router-dom";
-import { HiBadgeCheck, HiDocumentAdd, HiOutlineBookOpen, HiOutlineCollection, HiOutlineCurrencyDollar, HiOutlineHome, HiOutlineViewList, HiQuestionMarkCircle, HiShoppingCart, HiUserGroup } from 'react-icons/hi'
+import { HiBadgeCheck, HiDocumentAdd, HiLogout, HiOutlineBookOpen, HiOutlineCollection, HiOutlineCurrencyDollar, HiOutlineHome, HiOutlineViewList, HiQuestionMarkCircle, HiShoppingCart, HiUserGroup } from 'react-icons/hi'
 import UserRole from "../Hooks/UserRole";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { AuthContex } from "../Providers/AuthProvider";
 
 // At Frist fault in the condition all Sidebar then fetch users.
 
@@ -15,6 +16,13 @@ const Dashbord = () => {
 
     const [dataUser, isLoading] = UserRole();
     console.log("dataUSer", dataUser);
+    const { logout } = useContext(AuthContex);
+
+    const handleLogout = () => {
+        logout()
+            .then(() => { })
+            .catch((error) => console.error(error));
+    };
     useEffect(() => {
 
         if (dataUser?.role === 'student') {
@@ -93,7 +101,11 @@ const Dashbord = () => {
                             <div>
                                 <p className="font-medium">{dataUser?.name || 'User'}</p>
                                 <p className="text-sm opacity-70 capitalize">{dataUser?.role}</p>
+
                             </div>
+                            <button onClick={handleLogout} className="btn btn-error btn-sm mt-2">
+                                <HiLogout /> Logout
+                            </button>
                         </div>
                     </div>
                 </ul>
