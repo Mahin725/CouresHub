@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import instance from "../api/axios";
 
 const UseManageClass = () => {
   const {
@@ -9,14 +10,8 @@ const UseManageClass = () => {
     queryKey: ["classes"],
     queryFn: async () => {
       try {
-        const res = await fetch(
-          "https://speakup-ivory.vercel.app/classCollection"
-        );
-        if (!res.ok) {
-          throw new Error("Failed to fetch cart data");
-        }
-        const data = await res.json();
-        return data;
+        const res = await instance.get("/coures/allCoures")
+        return res.data.data;
       } catch (error) {
         console.error(error);
         throw error; // Rethrow the error to let react-query handle it
