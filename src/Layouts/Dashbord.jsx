@@ -43,7 +43,7 @@ const Dashbord = () => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">  
+                <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                     {/* Sidebar Header */}
                     <div className="mb-8">
                         <h2 className="text-2xl font-bold text-primary">CouresHub</h2>
@@ -63,6 +63,7 @@ const Dashbord = () => {
                     {/* Instructor Links */}
                     {IsInstructor && (
                         <>
+                            <li><Link to='/dashbord' className="text-lg mb-2 flex items-center gap-3"><HiOutlineHome className="text-xl" /> Home</Link></li>
                             <li><Link to='/dashbord/addnew' className="text-lg mb-2 flex items-center gap-3"><HiDocumentAdd className="text-xl" /> Add Class</Link></li>
                             <li><Link to='/dashbord/myclasses' className="text-lg mb-2 flex items-center gap-3"><HiOutlineBookOpen className="text-xl" /> My Classes</Link></li>
                         </>
@@ -71,6 +72,7 @@ const Dashbord = () => {
                     {/* Admin Links */}
                     {IsAdmin && (
                         <>
+                            <li><Link to='/dashbord' className="text-lg mb-2 flex items-center gap-3"><HiOutlineHome className="text-xl" /> Home</Link></li>
                             <li><Link to='/dashbord/manage-classes' className="text-lg mb-2 flex items-center gap-3"><HiOutlineCollection className="text-xl" /> Manage Classes</Link></li>
                             <li><Link to='/dashbord/manage-users' className="text-lg mb-2 flex items-center gap-3"><HiUserGroup className="text-xl" /> Manage Users</Link></li>
                         </>
