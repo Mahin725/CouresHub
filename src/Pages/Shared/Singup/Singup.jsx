@@ -43,7 +43,7 @@ const Singup = () => {
         userProfileUpdate(data.name, data.photo).then(() => {
           const user = { name: data.name, email: data.email, role: "student" };
 
-          fetch("https://speakup-ivory.vercel.app/users", {
+          fetch("https://course-hub-server-su6k.onrender.com/v1/user/postuser", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(user),
@@ -142,18 +142,16 @@ const Singup = () => {
           {step === 2 && (
             <div className="animate-fadeIn">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Photo URL (Optional but recommended)
+                Photo URL (Optional but recommended,soon Upload Feature Available)
               </label>
               <input
-                {...register("photo", { required: "Photo URL is required" })}
+                {...register("photo")}
                 type="url"
                 placeholder="https://example.com/your-photo.jpg"
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
                 autoFocus
               />
-              {errors.photo && (
-                <p className="text-xs text-red-600 mt-2">{errors.photo.message}</p>
-              )}
+              
               <p className="text-xs text-gray-500 mt-3">
                 Use a direct image link (e.g., from imgur, Facebook, or GitHub avatar)
               </p>
