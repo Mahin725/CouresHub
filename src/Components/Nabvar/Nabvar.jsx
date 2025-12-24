@@ -20,7 +20,7 @@ const Nabvar = () => {
 
       {user && (
         <li>
-          <Link to="/dashbord/mycart">Dashboard</Link>
+          <Link to="/dashbord">Dashboard</Link>
         </li>
       )}
     </>
@@ -110,7 +110,7 @@ const Nabvar = () => {
                   <span className="text-lg">{user.displayName || user.email}</span>
                 </li>
                 <li>
-                  <Link to="/dashbord/mycart">Dashboard</Link>
+                  <Link to="/dashbord">Dashboard</Link>
                 </li>
                 <li>
                   <button onClick={handleLogout} className="btn btn-error btn-sm mt-2">
