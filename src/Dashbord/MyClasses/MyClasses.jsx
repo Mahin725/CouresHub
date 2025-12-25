@@ -36,7 +36,7 @@ const MyClasses = () => {
   return (
     <div className="p-6 lg:p-10">
       <Helmet>
-        <title>My Classes | SpeakUp</title>
+        <title>My Coures | CouresHub</title>
       </Helmet>
 
       <h1 className="text-4xl font-bold mb-2">My Classes</h1>
