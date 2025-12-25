@@ -41,7 +41,7 @@ const InstructorHome = () => {
           <p className="text-base-content/70">Track your courses, students, and earnings.</p>
         </div>
         <Link to="/dashbord/addnew" className="btn btn-primary mt-4 sm:mt-0">
-          <HiOutlineDocumentAdd className="text-xl" /> Add New Class
+          <HiOutlineDocumentAdd className="text-xl" /> Add New Coures
         </Link>
       </div>
 

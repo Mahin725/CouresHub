@@ -82,7 +82,7 @@ const AddClass = () => {
                 </div>
               </div>
               <div>
-                <h2 className="text-3xl font-bold">Create a New Class</h2>
+                <h2 className="text-3xl font-bold">Create a New Coures</h2>
                 <p className="opacity-90">Share your knowledge with the world!</p>
               </div>
             </div>
@@ -105,12 +105,12 @@ const AddClass = () => {
               {/* Class Basics */}
               <div className="space-y-6">
                 <h3 className="text-2xl font-semibold flex items-center gap-3 text-indigo-700">
-                  <HiBookOpen className="text-3xl" /> Class Information
+                  <HiBookOpen className="text-3xl" /> Coures Information
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text font-semibold">Class Title *</span>
+                      <span className="label-text font-semibold">Coures Title *</span>
                     </label>
                     <input
                       {...register("name", { required: true })}
@@ -204,7 +204,7 @@ const AddClass = () => {
                   type="submit"
                   className="btn btn-wide btn-lg bg-gradient-to-r from-indigo-600 to-teal-600 hover:from-indigo-700 hover:to-teal-700 text-white font-bold text-xl shadow-lg transform hover:scale-105 transition"
                 >
-                  Submit Class for Review
+                  Submit Coures for Review
                 </button>
               </div>
             </form>

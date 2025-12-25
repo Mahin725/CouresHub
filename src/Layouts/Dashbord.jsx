@@ -72,8 +72,8 @@ const Dashbord = () => {
                     {IsInstructor && (
                         <>
                             <li><Link to='/dashbord' className="text-lg mb-2 flex items-center gap-3"><HiOutlineHome className="text-xl" /> Home</Link></li>
-                            <li><Link to='/dashbord/addnew' className="text-lg mb-2 flex items-center gap-3"><HiDocumentAdd className="text-xl" /> Add Class</Link></li>
-                            <li><Link to='/dashbord/myclasses' className="text-lg mb-2 flex items-center gap-3"><HiOutlineBookOpen className="text-xl" /> My Classes</Link></li>
+                            <li><Link to='/dashbord/addnew' className="text-lg mb-2 flex items-center gap-3"><HiDocumentAdd className="text-xl" /> Add Coures</Link></li>
+                            <li><Link to='/dashbord/myclasses' className="text-lg mb-2 flex items-center gap-3"><HiOutlineBookOpen className="text-xl" /> My Coureses</Link></li>
                         </>
                     )}
 
