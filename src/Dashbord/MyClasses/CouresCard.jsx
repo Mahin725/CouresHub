@@ -4,6 +4,7 @@ import {
   HiUsers,
   HiInformationCircle,
   HiPlusCircle,
+  HiVideoCamera,
 } from "react-icons/hi";
 import { useState } from "react";
 import instance from "../../api/axios";
@@ -136,21 +137,20 @@ const CourseCard = ({ course, onModuleAdded }) => {
             </p>
           )}
 
-          {/* Buttons */}
-          <div className="grid grid-cols-2 gap-3">
-            <Link
-              to={`/dashbord/update-class/${course?._id}`}
-              className="btn btn-primary flex items-center justify-center gap-2"
-            >
-              <HiPencil /> Update
-            </Link>
-
+          <div className="flex flex-col gap-3">
             <button
               onClick={() => setIsModalOpen(true)}
               className="btn btn-secondary flex items-center justify-center gap-2"
             >
-              <HiPlusCircle /> Add Module
+              <HiPlusCircle className="text-xl" /> Add Module
             </button>
+
+            <Link
+              to={`/dashbord/course-player/${course._id}`}
+              className="btn btn-primary flex items-center justify-center gap-2"
+            >
+              <HiVideoCamera className="text-xl" /> View Content
+            </Link>
           </div>
         </div>
       </div>

@@ -23,6 +23,7 @@ import DashbordHome from "../Dashbord/DashbordHome/DashbordHome";
 import CouresDetails from "../Pages/couresDetails/CouresDetails";
 import CouresContent from "../Dashbord/coures-content/CouresContent";
 import LiveChat from "../Dashbord/live-chat/LiveChat";
+import CoursePlayer from "../Dashbord/coures-content/CouresPlayer";
 
 export const router = createBrowserRouter([
     {
@@ -98,8 +99,8 @@ export const router = createBrowserRouter([
                 element: <EnrolledClass></EnrolledClass>
             },
             {
-                path: 'coures-content',
-                element: <CouresContent/>
+                path:'course-player/:id',
+                element: <CoursePlayer/>
             },
             {
                 path: 'payment-history',
