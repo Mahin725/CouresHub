@@ -13,7 +13,7 @@ const CoursePlayer = () => {
 
   useEffect(() => {
     // Fetch course details
-    instance.get(`/coures/${id}`).then((res) => {
+    instance.get(`/coures/getcoures/${id}`).then((res) => {
       setCourse(res.data.data || res.data);
     });
 
