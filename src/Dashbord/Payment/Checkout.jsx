@@ -1,140 +1,180 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React, { useContext, useEffect } from "react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContex } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
-import UseCart from "../../Hooks/UseCart";
+import { Loader2, CheckCircle } from "lucide-react";
 
-const Checkout = ({ price, cartId }) => {
-  const [clientSecret, setClientSecret] = useState("");
+const Checkout = ({ course }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [cardError, setCardError] = useState("");
   const { user } = useContext(AuthContex);
-  const [transaction, setTransaction] = useState("");
-  const [cart, refetch] = UseCart();
+
+  const [clientSecret, setClientSecret] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [cardError, setCardError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [transactionId, setTransactionId] = useState("");
+
+  const price = parseFloat(course?.price || 0);
 
   useEffect(() => {
-    if (price) {
+    if (price > 0) {
       fetch("https://speakup-ivory.vercel.app/create-payment-intent", {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ price: price?.price }),
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ price }),
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          setClientSecret(data.clientSecret);
-        });
+          if (data.clientSecret) {
+            setClientSecret(data.clientSecret);
+          }
+        })
+        .catch((err) => console.error("Intent error:", err));
     }
   }, [price]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!stripe || !elements) {
-      return;
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!stripe || !elements) return;
+
     const card = elements.getElement(CardElement);
-    if (card === null) {
-      return;
-    }
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    if (!card) return;
+
+    setProcessing(true);
+    setCardError("");
+
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
+
     if (error) {
-      console.log("Card Error: ", error);
       setCardError(error.message);
-    } else {
-      setCardError("");
-      console.log("PaymentMethod: ", paymentMethod);
+      setProcessing(false);
+      return;
     }
 
-    const { paymentIntent, error: confirmError } =
-      await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: card,
-          billing_details: {
-            email: user.email || "Unknown",
-            name: user.displayName || "Unknown",
-          },
+    const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: card,
+        billing_details: {
+          email: user?.email || "anonymous@example.com",
+          name: user?.displayName || "Anonymous",
         },
-      });
+      },
+    });
+
+    setProcessing(false);
+
     if (confirmError) {
-      console.log(confirmError);
       setCardError(confirmError.message);
+      return;
     }
-    console.log(paymentIntent);
+
     if (paymentIntent.status === "succeeded") {
-      setTransaction(paymentIntent.id);
-      const payment = {
+      setSuccess(true);
+      setTransactionId(paymentIntent.id);
+
+      // Save payment to backend
+      const paymentData = {
         email: user?.email,
         transaction: paymentIntent.id,
-        couresId: price?.cartId,
+        couresId: course?.cartId,
         date: new Date().toISOString(),
+        price: price,
+        courseName: course?.name,
       };
-      console.log(payment);
+
       fetch("https://speakup-ivory.vercel.app/payments", {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(payment),
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(paymentData),
       })
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data);
-
           if (data.insertedId) {
             Swal.fire({
-              position: "top-end",
               icon: "success",
-              title: "Successfully Enrolled The Class!",
+              title: "Payment Successful!",
+              text: `Enrolled in "${course.name}"`,
+              timer: 3000,
               showConfirmButton: false,
-              timer: 2500,
             });
           }
         });
     }
   };
+
   return (
-    <>
-      <form className="w-[300px]" onSubmit={handleSubmit}>
-        <CardElement
-          options={{
-            style: {
-              base: {
-                fontSize: "16px",
-                color: "#424770",
-                "::placeholder": {
-                  color: "#aab7c4",
+    <form onSubmit={handleSubmit} className="space-y-8">
+      <div>
+        <label className="block text-lg font-medium text-gray-700 mb-3">
+          Card Information
+        </label>
+        <div className="p-5 border border-gray-300 rounded-xl bg-gray-50 focus-within:border-indigo-500 focus-within:ring-4 focus-within:ring-indigo-100 transition-all">
+          <CardElement
+            options={{
+              style: {
+                base: {
+                  fontSize: "18px",
+                  color: "#1f2937",
+                  "::placeholder": {
+                    color: "#9ca3af",
+                  },
+                },
+                invalid: {
+                  color: "#ef4444",
                 },
               },
-              invalid: {
-                color: "#9e2146",
-              },
-            },
-          }}
-        />
-        <button
-          className="btn btn-outline btn-md mt-7"
-          type="submit"
-          disabled={!stripe || !clientSecret}
-        >
-          Pay Now
-        </button>
-        {/* <button></button> */}
-      </form>
-      {cardError && <p className="text-red-600">{cardError}</p>}
-      {transaction && (
-        <p className="text-green-600">
-          Transaction Completed with Transaction Id :{" "}
-          <span className="font-semibold text-1xl">{transaction}</span>
-        </p>
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Error Message */}
+      {cardError && (
+        <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700">
+          {cardError}
+        </div>
       )}
-    </>
+
+      {/* Success Message */}
+      {success && (
+        <div className="p-6 bg-green-50 border border-green-200 rounded-xl text-green-800 text-center">
+          <CheckCircle size={48} className="mx-auto mb-3 text-green-600" />
+          <p className="text-xl font-bold">Payment Successful!</p>
+          <p className="mt-2">Transaction ID:</p>
+          <p className="font-mono text-sm bg-white px-3 py-1 rounded mt-1 inline-block">
+            {transactionId}
+          </p>
+        </div>
+      )}
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={!stripe || !clientSecret || processing || success}
+        className="w-full py-5 px-8 bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold text-xl rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-3"
+      >
+        {processing ? (
+          <>
+            <Loader2 className="animate-spin" size={28} />
+            Processing...
+          </>
+        ) : success ? (
+          <>
+            <CheckCircle size={28} />
+            Payment Complete
+          </>
+        ) : (
+          <>
+            Pay ${price.toFixed(2)}
+          </>
+        )}
+      </button>
+    </form>
   );
 };
 
