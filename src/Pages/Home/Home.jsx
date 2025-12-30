@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import Hero from "../Hero/Hero";
-import Coures from "../Coures/Coures";
-import Instructors from "../Instructors/Instructors";
-import Info from "../info/Info";
-import Testimonial from "../Testimonial/Testimonial";
-import Mission from "../Mission/Mission";
-import Footer from "../../../Components/Footer/Footer";
+import Hero from "./Hero/Hero";
+import Coures from "./Coures/Coures";
+import Instructors from "./Instructors/Instructors";
+import Info from "./info/Info";
+import Testimonial from "./Testimonial/Testimonial";
+import Mission from "./Mission/Mission";
+import Footer from "../../Components/Footer/Footer";
 
 const Home = () => {
   return (
