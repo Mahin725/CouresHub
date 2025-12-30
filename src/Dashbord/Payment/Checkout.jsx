@@ -42,7 +42,7 @@ const Checkout = ({ course }) => {
 
     const card = elements.getElement(CardElement);
     if (!card) return;
-
+    console.log(card);
     setProcessing(true);
     setCardError("");
 

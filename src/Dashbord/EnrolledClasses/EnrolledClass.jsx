@@ -16,7 +16,7 @@ const EnrolledClass = () => {
       instance
         .get(`/coures/enrolled-classes?email=${user.email}`)
         .then((res) => {
-          setEnrolled(res.data);
+          setEnrolled(res.data.data);
           setLoading(false);
         })
         .catch((error) => {
