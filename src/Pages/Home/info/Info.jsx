@@ -1,26 +1,35 @@
-import React from 'react';
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 
 const Info = () => {
-    return (
-        <div className='bg-base-200 grid grid-cols-1 md:grid-cols-4 p-16 m-4 space-x-3 rounded-lg my-5 '>
-            <div className='bg-base-300 rounded-lg p-10 text-center'>
-                <p className='text-4xl font-bold'>20+</p>
-                <p className='font-semibold'>Expert Mentors</p>
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
+
+  return (
+    <section className="py-20 bg-base-200" ref={ref}>
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+          {[
+            { end: 25, label: "Expert Mentors", suffix: "+" },
+            { end: 120, label: "Language Courses", suffix: "+" },
+            { end: 6800, label: "Happy Students", suffix: "+" },
+            { end: 12, label: "Years of Excellence", suffix: "+" },
+          ].map((stat, i) => (
+            <div
+              key={i}
+              className="bg-base-100 rounded-2xl p-10 shadow-xl hover:shadow-2xl transition-all"
+              data-aos="zoom-in"
+              data-aos-delay={i * 50}
+            >
+              <h3 className="text-5xl font-bold text-primary">
+                {inView && <CountUp end={stat.end} duration={4} suffix={stat.suffix} />}
+              </h3>
+              <p className="text-xl font-semibold mt-4">{stat.label}</p>
             </div>
-            <div className='bg-base-300 rounded-lg p-10 text-center'>
-                <p className='text-4xl font-bold'>100+</p>
-                <p className='font-semibold'>Published Coures</p>
-            </div>
-            <div className='bg-base-300 rounded-lg p-10 text-center'>
-                <p className='text-4xl font-bold'>5800+</p>
-                <p className='font-semibold'>Enrolled Students</p>
-            </div>
-            <div className='bg-base-300 rounded-lg p-10 text-center'>
-                <p className='text-4xl font-bold'>10+</p>
-                <p className='font-semibold'>Years Experiances</p>
-            </div>
+          ))}
         </div>
-    );
+      </div>
+    </section>
+  );
 };
 
 export default Info;

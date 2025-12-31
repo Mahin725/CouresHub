@@ -8,6 +8,7 @@ import Pagination from "../../Components/paginaition/Pagination"; // Make sure t
 import Footer from "../../Components/Footer/Footer";
 import Mentor from "../../Components/mentor/Mentor";
 import CourseCard from "../../Components/UpdatedCouresCart/UpdatedCouresCart";
+import instance from "../../api/axios";
 
 const Classes = () => {
   const [classes, setClasses] = useState([]);
@@ -35,9 +36,8 @@ const Classes = () => {
   };
 
   useEffect(() => {
-    fetch("https://speakup-ivory.vercel.app/allclasses")
-      .then((res) => res.json())
-      .then((data) => setClasses(data));
+    instance.get("/coures/all-approved-coures")
+      .then(res => setClasses(res.data.data));
   }, []);
 
   // Calculate the index range for classes to display based on the current page

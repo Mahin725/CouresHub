@@ -1,18 +1,61 @@
+import { useState } from "react";
+import MentorDetailsModal from "../../Pages/Instructors/MentorDetailsModal";
 
-const Mentor = ({mentor}) => {
-    console.log(mentor)
+const Mentor = ({ mentor }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="card w-96 bg-base-200 shadow-xl flex flex-col items-center p-5 transform transition-all duration-1000 hover:scale-105 my-3">
-      <div className="avatar flex items-center justify-center ">
-        <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-          <img src={mentor?.instructorImage} />
+    <>
+      <div className="bg-base-200 rounded-xl shadow-md p-6 hover:shadow-xl transition">
+        <div className="flex flex-col items-center">
+          <img
+            src={mentor?.instructorImage}
+            className="w-20 h-20 rounded-full mb-3"
+          />
+
+          <h2 className="text-lg font-semibold">
+            {mentor?.instructorName}
+          </h2>
+
+          <p className="text-sm text-gray-500 mb-4">
+            {mentor?.role}
+          </p>
+
+          <div className="flex justify-between w-full text-center mb-4">
+            <div className="flex-1">
+              <p className="font-bold">
+                {mentor?.totalClasses}
+              </p>
+              <p className="text-xs text-gray-400">
+                Classes
+              </p>
+            </div>
+
+            <div className="flex-1">
+              <p className="font-bold">
+                {mentor?.totalStudents}
+              </p>
+              <p className="text-xs text-gray-400">
+                Students
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setOpen(true)}
+            className="btn btn-primary btn-sm w-full"
+          >
+            View Details
+          </button>
         </div>
       </div>
-      <div className="card-body text-center">
-        <h2 className="card-title">{mentor?.instructorName}</h2>
-        <h2>Speak-Up Mentor</h2>
-      </div>
-    </div>
+
+      <MentorDetailsModal
+        mentor={mentor}
+        isOpen={open}
+        onClose={() => setOpen(false)}
+      />
+    </>
   );
 };
 

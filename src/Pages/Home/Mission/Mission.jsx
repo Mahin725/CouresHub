@@ -1,36 +1,73 @@
-import React from "react";
-
 const Mission = () => {
   return (
-    <div>
-      <p className="text-center text-3xl font-bold my-6">Our Mission_</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 space-x-2">
-        <img className="rounded-lg " src="mission.jpg" alt="" />
-        <div className="font-semibold ">
-          <p className="p-5 mb-3 bg-base-300 rounded-lg">
-            <span className="text-primary">Why:</span> We are passionate about
-            empowering individuals to transform their lives through the power of
-            coding. We believe that everyone should have access to high-quality,
-            affordable coding education, regardless of their background or
-            experience. instructors are always available to guide and mentor our students,
-          </p>
-          <p className="p-5 mb-3 bg-base-300 rounded-lg">
-            <span className="text-primary">What:</span> We provide a comprehensive range of online
-            programming courses, instructors are always available to guide and mentor our students, from beginner-level Web Development to advanced
-            CSE Fundamentals and Advanced Programming Courses. Our courses are
-            designed to be engaging, effective, and tailored to the needs of
-            today's learners.
-          </p>
-          <p className="p-5  bg-base-300 rounded-lg">
-            <span className="text-primary">How:</span> We nurture our students in a personalized and
-            supportive environment that fosters confidence and success. Our
-            friendly and dedicated instructors are always available to guide and
-            mentor our students, ensuring they receive the support they need to
-            achieve their coding goals.
+    <section className="py-24 bg-base-200 relative overflow-hidden">
+      <div className="container mx-auto px-6">
+        {/* Heading */}
+        <div className="text-center mb-16" data-aos="fade-up">
+          <h2 className="text-4xl font-extrabold mb-4">
+            Our Mission & Vision
+          </h2>
+          <p className="text-base-content/70 max-w-2xl mx-auto">
+            Building industry-ready developers through practical learning,
+            real projects, and strong engineering fundamentals.
           </p>
         </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+          
+          {/* LEFT: Tech Image */}
+          <div data-aos="fade-right" className="relative">
+            <img
+              src="https://images.unsplash.com/photo-1605379399642-870262d3d051"
+              alt="Tech learning"
+              className="rounded-3xl shadow-2xl"
+            />
+            <div className="absolute -bottom-6 -right-6 bg-primary text-white px-6 py-4 rounded-2xl shadow-xl">
+              <p className="text-lg font-bold">Real-World Skills</p>
+              <p className="text-sm opacity-90">Not just theory</p>
+            </div>
+          </div>
+
+          {/* RIGHT: Mission Cards */}
+          <div className="space-y-6" data-aos="fade-left">
+            
+            <div className="bg-base-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition border border-base-300">
+              <h3 className="text-2xl font-bold text-primary mb-3">
+                🚀 Why We Exist
+              </h3>
+              <p className="text-base-content/80 leading-relaxed">
+                Too many learners know syntax but fail in real jobs.
+                We exist to close the gap between tutorials and
+                production-level software engineering.
+              </p>
+            </div>
+
+            <div className="bg-base-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition border border-base-300">
+              <h3 className="text-2xl font-bold text-primary mb-3">
+                🛠 What We Teach
+              </h3>
+              <p className="text-base-content/80 leading-relaxed">
+                Practical courses on Frontend, Backend, Databases,
+                System Design, Git workflows, and real team practices —
+                exactly what tech companies expect.
+              </p>
+            </div>
+
+            <div className="bg-base-100 p-8 rounded-2xl shadow-md hover:shadow-xl transition border border-base-300">
+              <h3 className="text-2xl font-bold text-primary mb-3">
+                🎯 How We Measure Success
+              </h3>
+              <p className="text-base-content/80 leading-relaxed">
+                Success means shipping real projects, understanding
+                engineering trade-offs, and confidently facing
+                technical interviews — not just completing videos.
+              </p>
+            </div>
+
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

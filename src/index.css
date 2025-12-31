@@ -2,6 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-li:hover{
-    color: yellow;
+/* Smooth scroll and better list hover */
+html body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+li:hover {
+    color: #FFC107;
+    transition: color 0.3s ease;
+}
+
+/* Optional: Custom card hover lift */
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s ease;
+}
+
+/* FORCE VISIBLE & BEAUTIFUL SCROLLBAR - WORKS EVERYWHERE */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch; /* Smooth iOS scroll */
+}
+
+/* Chrome, Edge, Safari */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 14px !important;
+  width: 14px !important;
+  background-color: transparent;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 999px;
+  margin: 0 10px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: #8b5cf6;
+  border-radius: 999px;
+  border: 3px solid #f1f5f9;
+  min-width: 60px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed;
+}
+
+/* Firefox */
+.overflow-x-auto {
+  scrollbar-width: auto !important;
+  scrollbar-color: #8b5cf6 #f1f5f9 !important;
+}
+
+/* Force show scrollbar even when not scrolling */
+.overflow-x-auto {
+  overflow-x: scroll !important;
 }

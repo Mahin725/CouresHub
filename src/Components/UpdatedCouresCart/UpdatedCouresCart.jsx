@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import UseCart from "../../Hooks/UseCart";
 import { AuthContex } from "../../Providers/AuthProvider";
+import useAddToCart from "../../Hooks/AddCart";
 
 const CourseCard = ({ course }) => {
-  console.log(course);
   const {
     _id,
     name,
@@ -14,127 +14,69 @@ const CourseCard = ({ course }) => {
     image,
     instructorName,
     enrolled,
-    availableSeats,
   } = course;
+
   const trimedDetails = details.substring(0, 50);
   const { user } = useContext(AuthContex);
+  const navigate = useNavigate();
 
-  const [cart, refetch] = UseCart();
+  const [, refetch] = UseCart();
   const [btnDisable, setDisable] = useState(false);
-  const [userFromData, setUserData] = useState(null);
+
+  const addToCart = useAddToCart(refetch, setDisable);
+
   const handleCart = () => {
     if (!user) {
       Swal.fire({
         position: "top-end",
         icon: "warning",
-        title: "You Need to Login Frist",
+        title: "You Need to Login First",
         showConfirmButton: false,
         timer: 2500,
       });
-      return Navigate("/login");
+      return navigate("/login");
     }
-    if (user && user?.email) {
-      const { _id, price, image, name } = course;
-      const seletedItem = {
-        cartId: _id,
-        name,
-        image,
-        price,
-        email: user.email,
-      };
-      fetch("https://speakup-ivory.vercel.app/carts", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(seletedItem),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data.insertedId) {
-            refetch();
-            setDisable(true);
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Coures Added On Cart!!",
-              showConfirmButton: false,
-              timer: 2500,
-            });
-          } else {
-            Swal.fire({
-              position: "top-end",
-              icon: "error",
-              title: "Coures Was Added!!",
-              showConfirmButton: false,
-              timer: 2500,
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+
+    const selectedItem = {
+      cartId: _id,
+      name,
+      image,
+      price,
+      email: user.email,
+    };
+
+    addToCart(selectedItem);
   };
-  useEffect(() => {
-    if (user?.email) {
-      fetch(`https://speakup-ivory.vercel.app/user?email=${user.email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-          setUserData(data);
-        });
-    }
-  }, [user?.email]);
 
   return (
-    <div
-      key={_id}
-      className="w-full md:h-[450px] xl:h-[400px] rounded overflow-hidden shadow-md bg-gray-100  flex flex-col"
-    >
-      {/* CARD IMAGE */}
-      <div>
-        <img src={image} alt={name} className="w-full h-36 object-cover" />
-      </div>
+    <div className="w-full rounded shadow-md bg-gray-100 flex flex-col">
+      <img src={image} alt={name} className="w-full h-36 object-cover" />
 
-      {/* CARD INFO/BODY */}
-      <div className="flex flex-col justify-between p-4 text-sm h-full">
-        <div className="mt-4">
-          <div className="font-bold text-base mb-2">{name}</div>
+      <div className="p-4 flex flex-col justify-between h-full">
+        <div>
+          <h3 className="font-bold">{name}</h3>
           <p className="text-gray-500 text-sm">{trimedDetails}</p>
         </div>
 
-        <div className="flex flex-col justify-start gap-4 mt-5">
-          <div className="">
-            <p className="text-start text-gray-600 text-sm">
-              <span className="font-semibold">Total enrolled:</span> {enrolled}
-            </p>
-            <p className="text-start text-gray-600 text-sm">
-              <span className="font-semibold">Instructor:</span>{" "}
-              {instructorName}
-            </p>
-          </div>
+        <div className="mt-4 space-y-2">
+          <p><b>Enrolled:</b> {enrolled}</p>
+          <p><b>Instructor:</b> {instructorName}</p>
 
-          <div className="mt-auto w-full space-y-2">
-            <button
-              disabled={btnDisable}
-              onClick={handleCart}
-              className="w-full bg-gray-800 text-white font-semibold py-1 md:py2 px-4 rounded-sm duration-300"
-            >
-              {btnDisable ? "Added" : "Add to cart"}
-            </button>
-            <button className="w-full bg-gray-800 text-white font-semibold py-1 md:py2 px-4 rounded-sm duration-300">
-              <Link
-                to={`/courses/${_id}`}
-                state={course}
-                course={course}
-                className="block"
-              >
-                View Details
-              </Link>
-            </button>
-          </div>
+          <button
+            disabled={btnDisable}
+            onClick={handleCart}
+            className="w-full bg-gray-800 text-white py-1 rounded"
+          >
+            {btnDisable ? "Added" : "Add to cart"}
+          </button>
+
+          <Link
+            to={`/courses/${_id}`}
+            state={course}
+            className="block text-center bg-blue-600 text-white py-1 rounded"
+          >
+            View Details
+          </Link>
         </div>
       </div>
     </div>

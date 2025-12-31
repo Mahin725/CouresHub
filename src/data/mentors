@@ -1,0 +1,47 @@
+const mentors = [
+  {
+    _id: "1",
+    instructorName: "Md. Asif Rahman",
+    instructorImage: "https://i.pravatar.cc/150?img=12",
+    role: "Senior Frontend Engineer",
+    expertise: ["React", "Redux", "Tailwind"],
+    experience: "5+ Years",
+    totalClasses: 18,
+    totalStudents: 1240,
+    bio: "Worked with multiple ed-tech platforms and trained junior developers."
+  },
+  {
+    _id: "2",
+    instructorName: "Nusrat Jahan",
+    instructorImage: "https://i.pravatar.cc/150?img=32",
+    role: "Backend Engineer",
+    expertise: ["Node.js", "MongoDB", "Express"],
+    experience: "4+ Years",
+    totalClasses: 14,
+    totalStudents: 860,
+    bio: "Specialized in scalable backend systems and database optimization."
+  },
+  {
+    _id: "3",
+    instructorName: "Tanvir Ahmed",
+    instructorImage: "https://i.pravatar.cc/150?img=56",
+    role: "Full Stack Developer",
+    expertise: ["MERN", "AWS"],
+    experience: "6+ Years",
+    totalClasses: 22,
+    totalStudents: 1570,
+    bio: "Built and deployed multiple full-stack applications for global clients."
+  },{
+    _id: "4",
+    instructorName: "Nusrat Jahan",
+    instructorImage: "https://i.pravatar.cc/150?img=32",
+    role: "Backend Engineer",
+    expertise: ["Node.js", "MongoDB", "Express"],
+    experience: "4+ Years",
+    totalClasses: 14,
+    totalStudents: 860,
+    bio: "Specialized in scalable backend systems and database optimization."
+  }
+];
+
+export default mentors;
